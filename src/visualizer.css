@@ -1,0 +1,47 @@
+.visualization-controller .main-panel .visualizer-container{
+  position: relative;
+  float: left;
+}
+
+.visualization-controller .main-panel:after {
+  content:"";
+  display:block;
+  clear:both;
+}
+
+svg.visualization{
+  background-color: #CBFFFF;
+}
+
+svg.visualization .tree-node circle{
+  fill: white;
+  fill-opacity: 0.8;
+  stroke: black;
+}
+
+svg.visualization .tree-node:hover circle{
+  fill: #FF9CDD;
+}
+
+svg.visualization .tree-node.focused circle, svg.visualization .array-cell.focused rect{
+  stroke: #FF1F1F;
+  stroke-width: 3px;
+  transition: stroke-width 0.3s ease-in-out;
+}
+
+svg.visualization .array-cell rect{
+  fill: white;
+  fill-opacity: 0.8;
+  stroke: black;
+}
+svg.visualization .array-cell.inactive rect{
+  fill: lightgrey;
+  fill-opacity: 0.8;
+  stroke: black;
+}
+
+svg.visualization .array-cell:hover rect{
+  fill: #FF9CDD;
+  transition: fill 0.1s ease-in-out;
+}
+
