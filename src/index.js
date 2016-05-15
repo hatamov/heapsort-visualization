@@ -182,7 +182,7 @@ class Visualizer {
 
 class VisualizationController {
 
-  constructor(mountNode, operationsList){
+  constructor(mountNode, operationsList, visualizerOptions){
     this.mountNode = mountNode;
     this.operationsList = operationsList;
 
@@ -193,7 +193,8 @@ class VisualizationController {
     this._initContainers();
 
     this.visualizer = new Visualizer(
-      this.domNode.querySelector('.visualizer-container'),  this.initialData
+      this.domNode.querySelector('.visualizer-container'),
+      this.initialData, visualizerOptions
     );
     this.visualizer.render();
 
@@ -210,7 +211,7 @@ class VisualizationController {
         <div class="main-panel">
             <div class="visualizer-container"></div>
             <div class="operations-list" >
-              <select multiple>
+              <select multiple="true">
               </select>
             </div>
         </div>
@@ -230,6 +231,7 @@ class VisualizationController {
 
   _fillOperationsSelector(){
     d3.select(this.opSelector)
+      .attr('size', 2)
       .style('height', this.visualizer.options.height)
       .style('width', 200)
       .selectAll('option')
@@ -258,7 +260,7 @@ class VisualizationController {
   _bindListeners(){
 
     $(this.opSelector).on('change', ()=> {
-      const opIndex = +$(event.target).find('option:selected').val();
+      const opIndex = +$(this.opSelector).find('option:selected').val();
       this._selectOperation(opIndex);
     });
 
@@ -430,5 +432,14 @@ const exampleOperationsList = [
 ];
 
 
-window.c = new VisualizationController(document.querySelector('#root'), exampleOperationsList);
+window.c = new VisualizationController(
+  document.querySelector('#root'),
+  exampleOperationsList,
+  {
+    height: 350,
+    width: 600,
+    animationSpeed: 400,
+    treeCirclesRadius: 20,
+  }
+);
 window.$ = $;
